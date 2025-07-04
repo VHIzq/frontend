@@ -1,8 +1,202 @@
 <div class="registry-form">
   <form [formGroup]="registryForm">
+    <!-- Nombre -->
     <mat-form-field class="example-full-width">
-    <mat-label>  </mat-label>
-    <input matInput formControlName="">
-  </mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input
+        matInput
+        formControlName="name"
+        placeholder="Nombre del registro"
+      />
+      <mat-error *ngIf="registryForm.get('name')?.hasError('required')">
+        El nombre es obligatorio.
+      </mat-error>
+      <mat-error *ngIf="registryForm.get('name')?.hasError('minlength')">
+        El nombre debe tener al menos 3 caracteres.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Apellido paterno -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Apellido paterno</mat-label>
+      <input
+        matInput
+        formControlName="firstLastName"
+        placeholder="Apellido paterno"
+      />
+      <mat-error
+        *ngIf="registryForm.get('firstLastName')?.hasError('required')"
+      >
+        El apellido paterno es obligatorio.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Apellido materno -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Apellido materno</mat-label>
+      <input
+        matInput
+        formControlName="secondsLastName"
+        placeholder="Apellido materno"
+      />
+    </mat-form-field>
+
+    <!-- Edad -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Edad</mat-label>
+      <input matInput formControlName="age" type="number" placeholder="Edad" />
+      <mat-error *ngIf="registryForm.get('age')?.hasError('min')">
+        La edad mínima es 0 años.
+      </mat-error>
+      <mat-error *ngIf="registryForm.get('age')?.hasError('required')">
+        La edad es obligatoria.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        type="email"
+        placeholder="Correo electrónico"
+      />
+      <mat-error *ngIf="registryForm.get('email')?.hasError('required')">
+        El correo es obligatorio.
+      </mat-error>
+      <mat-error *ngIf="registryForm.get('email')?.hasError('email')">
+        Ingresa un correo válido.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Teléfono -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Teléfono celular</mat-label>
+      <input
+        matInput
+        formControlName="cellphone"
+        placeholder="Teléfono celular"
+      />
+      <mat-error *ngIf="registryForm.get('cellphone')?.hasError('pattern')">
+        Ingresa un número válido de 10 dígitos.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Calle -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Calle</mat-label>
+      <input matInput formControlName="street" placeholder="Calle" />
+    </mat-form-field>
+
+    <!-- Número de calle -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Número de calle</mat-label>
+      <input
+        matInput
+        formControlName="streetNumber"
+        placeholder="Número de calle"
+      />
+    </mat-form-field>
+
+    <!-- Código postal -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Código postal</mat-label>
+      <input matInput formControlName="zipCode" placeholder="Código postal" />
+      <mat-error *ngIf="registryForm.get('zipCode')?.hasError('pattern')">
+        Código postal inválido.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Referencia -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Referencia</mat-label>
+      <input
+        matInput
+        formControlName="referende"
+        placeholder="Referencia del domicilio"
+      />
+    </mat-form-field>
+
+    <!-- Región -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Región</mat-label>
+      <input matInput formControlName="region" placeholder="Región" />
+    </mat-form-field>
+
+    <!-- Estado -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Estado</mat-label>
+      <input matInput formControlName="state" placeholder="Estado" />
+    </mat-form-field>
+
+    <!-- Número de casa -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Número de casa</mat-label>
+      <input
+        matInput
+        formControlName="houseNumber"
+        placeholder="Número de casa"
+      />
+    </mat-form-field>
+
+    <!-- Sexo -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Sexo</mat-label>
+      <mat-select formControlName="sex">
+        <mat-option value="M">Masculino</mat-option>
+        <mat-option value="F">Femenino</mat-option>
+      </mat-select>
+      <mat-error *ngIf="registryForm.get('sex')?.hasError('required')">
+        El sexo es obligatorio.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Líder de casa de paz -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Líder de casa de paz</mat-label>
+      <input
+        matInput
+        formControlName="peaceHouseLeader"
+        placeholder="Nombre del líder"
+      />
+    </mat-form-field>
+
+    <!-- Número de casa de paz -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Número de casa de paz</mat-label>
+      <input
+        matInput
+        formControlName="peaceHouseNumber"
+        placeholder="Número de casa de paz"
+      />
+    </mat-form-field>
+
+    <!-- ¿Primera visita? -->
+    <mat-form-field class="example-full-width">
+      <mat-label>¿Es su primera visita?</mat-label>
+      <mat-select formControlName="isFirstTimeVisit">
+        <mat-option [value]="true">Sí</mat-option>
+        <mat-option [value]="false">No</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Fecha de primera visita -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Fecha de primera visita</mat-label>
+      <input
+        matInput
+        formControlName="dateFirstTimeVisit"
+        [matDatepicker]="picker"
+        placeholder="Selecciona fecha"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <button type="submit" matButton="filled" color="primary" [disabled]="registryForm.invalid">
+      <mat-icon>send</mat-icon>
+      Submitir
+    </button>
   </form>
 </div>
