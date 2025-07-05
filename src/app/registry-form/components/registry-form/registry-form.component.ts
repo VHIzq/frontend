@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -10,11 +10,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'lra-registry-form',
   imports: [
     // Angular
+    CommonModule,
     ReactiveFormsModule,
 
     // Material
@@ -31,6 +33,9 @@ export class RegistryFormComponent implements OnInit {
 
   private fb = inject(FormBuilder);
 
+  @Output()
+  formData = new EventEmitter<RegistryForm.FormDataModel>();
+
   ngOnInit(): void {
     this.setupRegistryForm();
   }
@@ -41,7 +46,7 @@ export class RegistryFormComponent implements OnInit {
       return;
     }
 
-    //Dipatch the form value to the store or service
+    //TODO: Dipatch the form value to the store or service
   }
 
   private setupRegistryForm() {
