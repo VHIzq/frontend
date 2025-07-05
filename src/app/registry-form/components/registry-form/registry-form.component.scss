@@ -1,12 +1,29 @@
 .lra-registry-form {
-  height: 100%;
-  width: 90%;
-  margin: 0 auto;
-  padding: 16px;
+  display: grid;
+  grid-template-areas:
+    " title "
+    " form  ";
+  gap: 1rem;
+  grid-template-rows: min-content auto;
+
+  .area-title {
+    grid-area:  title;
+    justify-self: center;
+  }
 
   .area-form {
+    grid-area: form;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    row-gap: 1rem;
+    max-width: 600px;
+    margin: 32px auto;
+    width: 90%;
+
+    .area-submit {
+      padding: 1rem;
+      font-size: 1.5rem;
+      border-radius: 16px;
+    }
   }
 }

@@ -11,6 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { getRepublicStates } from './mexican-states.data';
 
 @Component({
   selector: 'lra-registry-form',
@@ -30,6 +31,7 @@ import { CommonModule } from '@angular/common';
 })
 export class RegistryFormComponent implements OnInit {
   registryForm!: FormGroup;
+  STATES = getRepublicStates()
 
   private fb = inject(FormBuilder);
 
