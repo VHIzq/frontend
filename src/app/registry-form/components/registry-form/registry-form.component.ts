@@ -1,4 +1,11 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -12,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { getRepublicStates } from './mexican-states.data';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'lra-registry-form',
@@ -29,17 +37,23 @@ import { getRepublicStates } from './mexican-states.data';
   templateUrl: './registry-form.component.html',
   styleUrl: './registry-form.component.scss',
 })
-export class RegistryFormComponent implements OnInit {
+export class RegistryFormComponent implements OnInit, OnDestroy {
   registryForm!: FormGroup;
-  STATES = getRepublicStates()
+  STATES = getRepublicStates();
 
   private fb = inject(FormBuilder);
+  private destroy$ = new Subject<void>();
 
   @Output()
   formData = new EventEmitter<RegistryForm.FormDataModel>();
 
   ngOnInit(): void {
     this.setupRegistryForm();
+    this.setupFirsDateDefault();
+  }
+
+  ngOnDestroy(): void {
+    this.destroySubscriptions();
   }
 
   handleOnSubmit() {
@@ -72,5 +86,22 @@ export class RegistryFormComponent implements OnInit {
       isFirstTimeVisit: [null],
       dateFirstTimeVisit: [null],
     });
+  }
+
+  private setupFirsDateDefault() {
+    this.registryForm.controls['isFirstTimeVisit'].valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((response) => {
+        if (response) {
+          this.registryForm.controls['dateFirstTimeVisit'].setValue(new Date());
+        } else {
+          this.registryForm.controls['dateFirstTimeVisit'].setValue(null);
+        }
+      });
+  }
+
+  private destroySubscriptions() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
