@@ -12,6 +12,4 @@ import { PreviewFormComponent } from '../../components/preview-form/preview-form
   templateUrl: './registry-form-view.component.html',
   styleUrl: './registry-form-view.component.scss'
 })
-export class RegistryFormViewComponent {
-  readonly dialogRef = inject(MatDialogRef<PreviewFormComponent>);
-}
+export class RegistryFormViewComponent {}
