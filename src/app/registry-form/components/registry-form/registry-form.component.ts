@@ -20,6 +20,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { getRepublicStates } from './mexican-states.data';
 import { Subject, takeUntil } from 'rxjs';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { PreviewFormComponent } from '../preview-form/preview-form.component';
 
 @Component({
   selector: 'lra-registry-form',
@@ -33,9 +35,11 @@ import { Subject, takeUntil } from 'rxjs';
     MatDatepickerModule,
     MatSelectModule,
     MatIconModule,
+    MatDialogModule
   ],
   templateUrl: './registry-form.component.html',
   styleUrl: './registry-form.component.scss',
+  standalone: true,
 })
 export class RegistryFormComponent implements OnInit, OnDestroy {
   registryForm!: FormGroup;
@@ -43,6 +47,7 @@ export class RegistryFormComponent implements OnInit, OnDestroy {
 
   private fb = inject(FormBuilder);
   private destroy$ = new Subject<void>();
+  readonly dialog = inject(MatDialog);
 
   @Output()
   formData = new EventEmitter<RegistryForm.FormDataModel>();
@@ -65,6 +70,13 @@ export class RegistryFormComponent implements OnInit, OnDestroy {
     console.log('data', this.registryForm.value);
 
     //TODO: Dipatch the form value to the store or service
+  }
+
+  openDialog(): void {
+    this.dialog.open(PreviewFormComponent, {
+      width: '250px',
+      data: this.registryForm.value,
+    });
   }
 
   private setupRegistryForm() {

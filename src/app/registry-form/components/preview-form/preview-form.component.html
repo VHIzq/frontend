@@ -1,1 +1,8 @@
-<p>preview-form works!</p>
+<h2 mat-dialog-title>Previsualización de datos</h2>
+<mat-dialog-content>
+  <pre>{{ data | json }}</pre>
+  data:
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>
