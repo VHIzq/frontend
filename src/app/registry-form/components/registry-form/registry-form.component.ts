@@ -62,29 +62,31 @@ export class RegistryFormComponent implements OnInit, OnDestroy {
       return;
     }
 
+    console.log('data', this.registryForm.value);
+
     //TODO: Dipatch the form value to the store or service
   }
 
   private setupRegistryForm() {
     this.registryForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      firstLastName: ['', [Validators.required]],
-      secondsLastName: [''],
-      age: [null, [Validators.required, Validators.min(0)]],
-      email: ['', [Validators.required, Validators.email]],
-      cellphone: ['', [Validators.pattern(/^\d{10}$/)]],
-      street: [''],
-      streetNumber: [''],
-      zipCode: ['', [Validators.pattern(/^\d{5}$/)]],
-      referende: [''],
-      region: [''],
-      state: [''],
-      houseNumber: [''],
-      sex: ['', [Validators.required]],
-      peaceHouseLeader: [''],
-      peaceHouseNumber: [''],
-      isFirstTimeVisit: [null],
-      dateFirstTimeVisit: [null],
+      name: ['Abc', [Validators.required, Validators.minLength(3)]],
+      firstLastName: ['Def', [Validators.required]],
+      secondsLastName: ['FGH'],
+      age: [20, [Validators.required, Validators.min(0)]],
+      email: ['test@demo.com', [Validators.required, Validators.email]],
+      cellphone: ['5514174968', [Validators.pattern(/^\d{10}$/)]],
+      street: ['Arenal'],
+      streetNumber: ['51'],
+      zipCode: ['04600', [Validators.pattern(/^\d{5}$/)]],
+      referende: ['Tren Ligero'],
+      region: ['Huipulco'],
+      state: ['Ciudad de Mexico'],
+      houseNumber: ['111'],
+      sex: ['Masculino', [Validators.required]],
+      peaceHouseLeader: ['22'],
+      peaceHouseNumber: ['33'],
+      isFirstTimeVisit: [true],
+      dateFirstTimeVisit: [new Date()],
     });
   }
 
