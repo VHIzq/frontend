@@ -1,10 +1,46 @@
 <h2 mat-dialog-title>Informacion Capturada</h2>
-<mat-dialog-content>
-  <ul>
-    <li *ngFor="let item of data | keyvalue">
-      <strong>{{ item.key }}:</strong> {{ item.value }}
-    </li>
-  </ul>
+<mat-dialog-content class="area-preview">
+  <strong> Nombre: </strong>
+  <span> {{ data.name }} </span>
+
+  <strong> Apellido Paterno: </strong>
+  <span> {{ data.firstLastName}} </span>
+
+  <strong> Apellido Materno: </strong>
+  <span> {{ data.secondsLastName }} </span>
+
+  <strong> Edad: </strong>
+  <span> {{ data.age }} </span>
+
+  <strong> Email: </strong>
+  <span> {{data.email}} </span>
+
+  <strong> Celular: </strong>
+  <span> {{data.cellphone}} </span>
+
+  <strong>Calle:</strong>
+  <span> {{data.street }} </span>
+
+  <strong>Numero exterior: </strong>
+  <span> {{data.streetNumber}} </span>
+
+  <strong> Codigo Postal: </strong>
+  <span> {{data.zipCode}} </span>
+
+  <strong> Referencia: </strong>
+  <span> {{ data.referende}} </span>
+
+  <strong>Region: </strong>
+  <span> {{ data.region}} </span>
+
+  <strong>Estado: </strong>
+  <span> {{data.state }} </span>
+
+  <strong> Numero interior: </strong>
+  <span> {{data.houseNumber}} </span>
+
+  <strong> Sexo: </strong>
+  <span> {{data.sex}} </span>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cerrar</button>
