@@ -19,7 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { getRepublicStates } from './mexican-states.data';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PreviewFormComponent } from '../preview-form/preview-form.component';
 
@@ -35,7 +35,7 @@ import { PreviewFormComponent } from '../preview-form/preview-form.component';
     MatDatepickerModule,
     MatSelectModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   templateUrl: './registry-form.component.html',
   styleUrl: './registry-form.component.scss',
@@ -73,10 +73,20 @@ export class RegistryFormComponent implements OnInit, OnDestroy {
   }
 
   openDialog(): void {
-    this.dialog.open(PreviewFormComponent, {
+    const dialogRef = this.dialog.open(PreviewFormComponent, {
       width: '250px',
       data: this.registryForm.value,
     });
+
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((shouldSubmit: boolean) => {
+        if (shouldSubmit) {
+          this.formData.emit(this.registryForm.value);
+          this.registryForm.reset();
+        }
+      });
   }
 
   private setupRegistryForm() {

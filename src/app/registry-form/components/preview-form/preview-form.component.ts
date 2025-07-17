@@ -1,6 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'lra-preview-form',
@@ -10,8 +14,16 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
   standalone: true,
 })
 export class PreviewFormComponent {
+  @Output()
+  shouldSubmitForm = new EventEmitter<boolean>();
+
   constructor(
     public dialogRef: MatDialogRef<PreviewFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
+
+  handleSubmitForm() {
+    this.dialogRef.close(true);  
+
+  }
 }
