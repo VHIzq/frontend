@@ -1,6 +1,7 @@
 <div class="lra-registry-form">
   <h2 class="area-title">Registro de almas nuevas</h2>
   <form class="area-form" [formGroup]="registryForm" (ngSubmit)="handleOnSubmit()" >
+    <h3>Datos personales</h3>
     <!-- Nombre -->
     <mat-form-field>
       <mat-label>Nombre</mat-label>
@@ -84,6 +85,8 @@
       </mat-error>
     </mat-form-field>
 
+    <h3>Domicilio</h3>
+
     <!-- Calle -->
     <mat-form-field>
       <mat-label>Calle</mat-label>
@@ -156,6 +159,8 @@
         El sexo es obligatorio.
       </mat-error>
     </mat-form-field>
+
+    <h3>Casa de Paz</h3>
 
     <!-- Líder de casa de paz -->
     <mat-form-field>

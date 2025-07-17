@@ -4,7 +4,7 @@
   <span> {{ data.name }} </span>
 
   <strong> Apellido Paterno: </strong>
-  <span> {{ data.firstLastName}} </span>
+  <span> {{ data.firstLastName }} </span>
 
   <strong> Apellido Materno: </strong>
   <span> {{ data.secondsLastName }} </span>
@@ -13,35 +13,45 @@
   <span> {{ data.age }} </span>
 
   <strong> Email: </strong>
-  <span> {{data.email}} </span>
+  <span> {{ data.email }} </span>
 
   <strong> Celular: </strong>
-  <span> {{data.cellphone}} </span>
+  <span> {{ data.cellphone }} </span>
 
   <strong>Calle:</strong>
-  <span> {{data.street }} </span>
+  <span> {{ data.street }} </span>
 
   <strong>Numero exterior: </strong>
-  <span> {{data.streetNumber}} </span>
+  <span> {{ data.streetNumber }} </span>
 
   <strong> Codigo Postal: </strong>
-  <span> {{data.zipCode}} </span>
+  <span> {{ data.zipCode }} </span>
 
   <strong> Referencia: </strong>
-  <span> {{ data.referende}} </span>
+  <span> {{ data.referende }} </span>
 
   <strong>Region: </strong>
-  <span> {{ data.region}} </span>
+  <span> {{ data.region }} </span>
 
   <strong>Estado: </strong>
-  <span> {{data.state }} </span>
+  <span> {{ data.state }} </span>
 
   <strong> Numero interior: </strong>
-  <span> {{data.houseNumber}} </span>
+  <span> {{ data.houseNumber }} </span>
 
   <strong> Sexo: </strong>
-  <span> {{data.sex}} </span>
+  <span> {{ data.sex }} </span>
+
+  <strong> Lider de Casa de Paz: </strong>
+  <span> {{ data.peaceHouseLeader }} </span>
+
+  <strong> Numero de Casa de Paz: </strong>
+  <span> {{ data.peaceHouseNumber }} </span>
+
+  <strong> Fecha de la primera visita: </strong>
+  <span> {{ data.firstTimeVisit }} </span>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cerrar</button>
+  <button class="area-edit" mat-button mat-dialog-close>Editar</button>
+  <button class="area-submit" mat-button mat-dialog-close>Submitir</button>
 </mat-dialog-actions>
