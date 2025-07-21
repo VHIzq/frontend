@@ -17,12 +17,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
+import { CommonModule, WeekDay } from '@angular/common';
 import { getRepublicStates } from './mexican-states.data';
 import { Subject, take, takeUntil } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PreviewFormComponent } from '../preview-form/preview-form.component';
-import { getDiscipuladores, getNetworks, getPastors } from './assignations.data';
+import {
+  getDiscipuladores,
+  getNetworks,
+  getPastors,
+} from './assignations.data';
+import { MatTimepickerModule } from '@angular/material/timepicker';
 
 @Component({
   selector: 'lra-registry-form',
@@ -37,6 +42,7 @@ import { getDiscipuladores, getNetworks, getPastors } from './assignations.data'
     MatSelectModule,
     MatIconModule,
     MatDialogModule,
+    MatTimepickerModule,
   ],
   templateUrl: './registry-form.component.html',
   styleUrl: './registry-form.component.scss',
@@ -59,7 +65,6 @@ export class RegistryFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.setupRegistryForm();
     this.setupFirsDateDefault();
-    // this.setupPastor();
   }
 
   ngOnDestroy(): void {
@@ -115,8 +120,13 @@ export class RegistryFormComponent implements OnInit, OnDestroy {
       isFirstTimeVisit: [true],
       dateFirstTimeVisit: [new Date()],
       network: ['Isacar', [Validators.required]],
-      pastor: ['', [Validators.required]],
-      discipulador: ['', [Validators.required]],
+      pastor: ['Filiberto', [Validators.required]],
+      discipulador: ['Marisela Lobato', [Validators.required]],
+      entryTipe: ['fiesta', Validators.required],
+      invitedBy: ['Elena Tavira', Validators.required],
+      comments: [''],
+      visitDay: ['', [Validators.required]],
+      visitTime: ['12:00', [Validators.required]],
     });
   }
 
@@ -131,15 +141,6 @@ export class RegistryFormComponent implements OnInit, OnDestroy {
         }
       });
   }
-
-  // private setupPastor() {
-  //   this.registryForm.controls['network'].valueChanges
-  //     .pipe(takeUntil(this.destroy$))
-  //     .subscribe((network) => {
-  //       const pastors = this.PASTORS[network] || [];
-  //       this.registryForm.controls['pastor'].setValue(pastors[0] || '');
-  //     });
-  // }
 
   private destroySubscriptions() {
     this.destroy$.next();

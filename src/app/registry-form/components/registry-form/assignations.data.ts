@@ -4,9 +4,9 @@ export const getNetworks = (): Array<string> => {
 
 export const getPastors = (): Record<string, Array<string>> => {
   return {
-    Isacar: ['Pastor 1', 'Pastor 2'],
-    Sabaot: ['Pastor 3', 'Pastor 4'],
-    Gedeon: ['Pastor 5', 'Pastor 6'],
+    Isacar: ['Filiberto', 'Pastor 2'],
+    Sabaot: ['Rosita', 'Pastor 4'],
+    Gedeon: ['José', 'Pastor 6'],
   };
 };
 

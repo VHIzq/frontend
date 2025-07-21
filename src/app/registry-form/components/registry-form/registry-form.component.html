@@ -85,6 +85,57 @@
       }
     </mat-form-field>
 
+    <!-- Tipo de ingreso -->
+    <mat-form-field>
+      <mat-label>Tipo de ingreso</mat-label>
+      <mat-select formControlName="entryTipe">
+        <mat-option value="fiesta">Fiesta</mat-option>
+        <mat-option value="celebracion">Celebracion</mat-option>
+      </mat-select>
+      @if (registryForm.get('entryTipe')?.hasError('required')) {
+      <mat-error> El tipo de ingreso es obligatorio. </mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Nombre de quien lo invito -->
+    <mat-form-field>
+      <mat-label>Nombre de quien lo invitó</mat-label>
+      <input
+        matInput
+        formControlName="invitedBy"
+        placeholder="Nombre de quien lo invitó"
+      />
+      @if (registryForm.get('invitedBy')?.hasError('required')) {
+      <mat-error> El nombre de quien lo invitó es obligatorio. </mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Dia  de la semana para visitar-->
+    <mat-form-field>
+      <mat-label>Día de la semana para visitar</mat-label>
+      <mat-select formControlName="visitDay">
+        <mat-option value="lunes">Lunes</mat-option>
+        <mat-option value="martes">Martes</mat-option>
+        <mat-option value="miercoles">Miércoles</mat-option>
+        <mat-option value="jueves">Jueves</mat-option>
+        <mat-option value="viernes">Viernes</mat-option>
+        <mat-option value="sabado">Sábado</mat-option>
+        <mat-option value="domingo">Domingo</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Hora para visitar -->
+    <mat-form-field>
+      <mat-label>Hora para visitar</mat-label>
+      <input
+        matInput
+        formControlName="visitTime"
+        [matTimepicker]="timePicker"
+      />
+      <mat-timepicker-toggle matIconSuffix [for]="timePicker" />
+      <mat-timepicker #timePicker />
+    </mat-form-field>
+
     <h3>Domicilio</h3>
 
     <!-- Calle -->
@@ -250,6 +301,16 @@
       @if (registryForm.get('discipulador')?.hasError('required')) {
       <mat-error> El discipulador es obligatorio. </mat-error>
       }
+    </mat-form-field>
+
+    <!-- Comentarios -->
+    <mat-form-field>
+      <mat-label>Comentarios</mat-label>
+      <textarea
+        matInput
+        formControlName="comments"
+        placeholder="Comentarios adicionales"
+      ></textarea>
     </mat-form-field>
 
     <button
