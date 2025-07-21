@@ -1,0 +1,19 @@
+<div class="container">
+  <h2 class="area-title">Listado de enviados</h2>
+  @for (entry of registryListMock; let i = $index; track entry.id) {
+    <div class="area-item">
+      <mat-icon>person</mat-icon>
+      <div >{{entry.name}}</div>
+      <div>{{entry.status}}</div>
+
+      <button class="action-button" mat-button (click)="handleEdit()">
+        <mat-icon class="edit-icon" >edit</mat-icon>
+      </button>
+      <button class="action-button" mat-button (click)="handleDelete()">
+        <mat-icon class="delete-icon" >delete_forever</mat-icon>
+      </button>
+    </div>
+
+  }
+</div>
+
