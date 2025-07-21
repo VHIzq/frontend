@@ -1,6 +1,10 @@
 <div class="lra-registry-form">
   <h2 class="area-title">Registro de almas nuevas</h2>
-  <form class="area-form" [formGroup]="registryForm" (ngSubmit)="handleOnSubmit()" >
+  <form
+    class="area-form"
+    [formGroup]="registryForm"
+    (ngSubmit)="handleOnSubmit()"
+  >
     <h3>Datos personales</h3>
     <!-- Nombre -->
     <mat-form-field>
@@ -10,12 +14,11 @@
         formControlName="name"
         placeholder="Nombre del registro"
       />
-      <mat-error *ngIf="registryForm.get('name')?.hasError('required')">
-        El nombre es obligatorio.
-      </mat-error>
-      <mat-error *ngIf="registryForm.get('name')?.hasError('minlength')">
-        El nombre debe tener al menos 3 caracteres.
-      </mat-error>
+      @if (registryForm.get('name')?.hasError('required')) {
+      <mat-error> El nombre es obligatorio. </mat-error>
+      } @if (registryForm.get('name')?.hasError('minlength')) {
+      <mat-error> El nombre debe tener al menos 3 caracteres. </mat-error>
+      }
     </mat-form-field>
 
     <!-- Apellido paterno -->
@@ -26,11 +29,9 @@
         formControlName="firstLastName"
         placeholder="Apellido paterno"
       />
-      <mat-error
-        *ngIf="registryForm.get('firstLastName')?.hasError('required')"
-      >
-        El apellido paterno es obligatorio.
-      </mat-error>
+      @if (registryForm.get('firstLastName')?.hasError('required')) {
+      <mat-error> El apellido paterno es obligatorio. </mat-error>
+      }
     </mat-form-field>
 
     <!-- Apellido materno -->
@@ -47,12 +48,11 @@
     <mat-form-field>
       <mat-label>Edad</mat-label>
       <input matInput formControlName="age" type="number" placeholder="Edad" />
-      <mat-error *ngIf="registryForm.get('age')?.hasError('min')">
-        La edad mínima es 0 años.
-      </mat-error>
-      <mat-error *ngIf="registryForm.get('age')?.hasError('required')">
-        La edad es obligatoria.
-      </mat-error>
+      @if (registryForm.get('age')?.hasError('min')) {
+      <mat-error> La edad mínima es 0 años. </mat-error>
+      } @if (registryForm.get('age')?.hasError('required')) {
+      <mat-error> La edad es obligatoria. </mat-error>
+      }
     </mat-form-field>
 
     <!-- Email -->
@@ -64,12 +64,12 @@
         type="email"
         placeholder="Correo electrónico"
       />
-      <mat-error *ngIf="registryForm.get('email')?.hasError('required')">
-        El correo es obligatorio.
-      </mat-error>
-      <mat-error *ngIf="registryForm.get('email')?.hasError('email')">
-        Ingresa un correo válido.
-      </mat-error>
+
+      @if (registryForm.get('email')?.hasError('required')) {
+      <mat-error> El correo es obligatorio. </mat-error>
+      } @if (registryForm.get('email')?.hasError('email')) {
+      <mat-error> Ingresa un correo válido. </mat-error>
+      }
     </mat-form-field>
 
     <!-- Teléfono -->
@@ -80,9 +80,9 @@
         formControlName="cellphone"
         placeholder="Teléfono celular"
       />
-      <mat-error *ngIf="registryForm.get('cellphone')?.hasError('pattern')">
-        Ingresa un número válido de 10 dígitos.
-      </mat-error>
+      @if ( registryForm.get('cellphone')?.hasError('pattern') ) {
+      <mat-error> Ingresa un número válido de 10 dígitos. </mat-error>
+      }
     </mat-form-field>
 
     <h3>Domicilio</h3>
@@ -107,9 +107,9 @@
     <mat-form-field>
       <mat-label>Código postal</mat-label>
       <input matInput formControlName="zipCode" placeholder="Código postal" />
-      <mat-error *ngIf="registryForm.get('zipCode')?.hasError('pattern')">
-        Código postal inválido.
-      </mat-error>
+      @if (registryForm.get('zipCode')?.hasError('pattern')) {
+      <mat-error> Código postal inválido. </mat-error>
+      }
     </mat-form-field>
 
     <!-- Referencia -->
@@ -132,9 +132,11 @@
     <mat-form-field>
       <mat-label>Estado</mat-label>
       <mat-select formControlName="state">
-        <mat-option *ngFor="let estado of STATES" [value]="estado">
+        @for (estado of STATES; track estado) {
+        <mat-option [value]="estado">
           {{ estado }}
         </mat-option>
+        }
       </mat-select>
     </mat-form-field>
 
@@ -155,9 +157,10 @@
         <mat-option value="M">Masculino</mat-option>
         <mat-option value="F">Femenino</mat-option>
       </mat-select>
-      <mat-error *ngIf="registryForm.get('sex')?.hasError('required')">
-        El sexo es obligatorio.
-      </mat-error>
+
+      @if (registryForm.get('sex')?.hasError('required')) {
+      <mat-error> El sexo es obligatorio. </mat-error>
+      }
     </mat-form-field>
 
     <h3>Casa de Paz</h3>
@@ -204,13 +207,59 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
+    <!-- Red -->
+    <h3>Red</h3>
+    <mat-form-field>
+      <mat-label>Red</mat-label>
+      <mat-select formControlName="network">
+        @for (network of NETWORKS; track network) {
+        <mat-option [value]="network">
+          {{ network }}
+        </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Pastor -->
+    <mat-form-field>
+      <mat-label>Pastor</mat-label>
+      <mat-select formControlName="pastor">
+        @for (pastor of PASTORS[registryForm.get('network')?.value] || []; track
+        pastor) {
+        <mat-option [value]="pastor">
+          {{ pastor }}
+        </mat-option>
+        }
+      </mat-select>
+      @if (registryForm.get('pastor')?.hasError('required')) {
+      <mat-error> El pastor es obligatorio. </mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Discipulador -->
+    <mat-form-field>
+      <mat-label>Discipulador</mat-label>
+      <mat-select formControlName="discipulador">
+        @for (discipulador of DISCIPULADORES[ registryForm.get('network')?.value
+        ] || []; track discipulador) {
+        <mat-option [value]="discipulador">
+          {{ discipulador }}
+        </mat-option>
+        }
+      </mat-select>
+      @if (registryForm.get('discipulador')?.hasError('required')) {
+      <mat-error> El discipulador es obligatorio. </mat-error>
+      }
+    </mat-form-field>
+
     <button
       type="submit"
       matButton="filled"
       class="area-submit"
       color="primary"
       [disabled]="registryForm.invalid"
-      (click)="openDialog()">
+      (click)="openDialog()"
+    >
       Preview
     </button>
   </form>

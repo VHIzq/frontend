@@ -22,6 +22,7 @@ import { getRepublicStates } from './mexican-states.data';
 import { Subject, take, takeUntil } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PreviewFormComponent } from '../preview-form/preview-form.component';
+import { getDiscipuladores, getNetworks, getPastors } from './assignations.data';
 
 @Component({
   selector: 'lra-registry-form',
@@ -44,6 +45,9 @@ import { PreviewFormComponent } from '../preview-form/preview-form.component';
 export class RegistryFormComponent implements OnInit, OnDestroy {
   registryForm!: FormGroup;
   STATES = getRepublicStates();
+  NETWORKS = getNetworks();
+  PASTORS = getPastors();
+  DISCIPULADORES = getDiscipuladores();
 
   private fb = inject(FormBuilder);
   private destroy$ = new Subject<void>();
@@ -55,6 +59,7 @@ export class RegistryFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.setupRegistryForm();
     this.setupFirsDateDefault();
+    // this.setupPastor();
   }
 
   ngOnDestroy(): void {
@@ -104,11 +109,14 @@ export class RegistryFormComponent implements OnInit, OnDestroy {
       region: ['Huipulco'],
       state: ['Ciudad de Mexico'],
       houseNumber: ['111'],
-      sex: ['Masculino', [Validators.required]],
-      peaceHouseLeader: ['22'],
+      sex: ['M', [Validators.required]],
+      peaceHouseLeader: ['Joe'],
       peaceHouseNumber: ['33'],
       isFirstTimeVisit: [true],
       dateFirstTimeVisit: [new Date()],
+      network: ['Isacar', [Validators.required]],
+      pastor: ['', [Validators.required]],
+      discipulador: ['', [Validators.required]],
     });
   }
 
@@ -123,6 +131,15 @@ export class RegistryFormComponent implements OnInit, OnDestroy {
         }
       });
   }
+
+  // private setupPastor() {
+  //   this.registryForm.controls['network'].valueChanges
+  //     .pipe(takeUntil(this.destroy$))
+  //     .subscribe((network) => {
+  //       const pastors = this.PASTORS[network] || [];
+  //       this.registryForm.controls['pastor'].setValue(pastors[0] || '');
+  //     });
+  // }
 
   private destroySubscriptions() {
     this.destroy$.next();
