@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { faker } from '@faker-js/faker';
+import { RegistryListModel } from './registry-list.model';
 
 @Component({
   selector: 'lra-registry-list',
@@ -16,16 +16,19 @@ import { faker } from '@faker-js/faker';
   styleUrl: './registry-list.component.scss',
 })
 export class RegistryListComponent {
-  registryListMock = Array.from({ length: 10 }).map((_, i) => ({
-    id: i + 1,
-    name: faker.person.fullName(),
-    status: faker.helpers.arrayElement(['enviado', 'pendiente', 'eliminado']),
-  }));
+  @Input()
+  entryList!: Array<RegistryListModel.Entry>;
+
+  @Output()
+  deleteEntry =  new EventEmitter<number>();
 
   handleEdit() {
     throw new Error('Method not implemented.');
   }
-  handleDelete() {
-    throw new Error('Method not implemented.');
+
+  handleDeleteEntry(idEntry: number) {
+    const entryList = this.entryList.filter((entry) => entry.id !== idEntry);
+    this.entryList = entryList;
+    this.deleteEntry.emit(idEntry);
   }
 }
