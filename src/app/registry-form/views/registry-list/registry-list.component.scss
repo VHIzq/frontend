@@ -7,10 +7,30 @@
   }
 
   .area-item {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: var(--spacing-md);
+    display: grid;
+    grid-template-columns: min-content 1fr min-content min-content min-content;
+    grid-template-areas: " person  name  status  edit  delete ";
+    gap: var(--spacing-sm);
+
+    .area-person {
+      grid-area: person;
+    }
+
+    .area-name {
+      grid-area: name;
+    }
+
+    .area-status {
+      grid-area: status;
+    }
+
+    .area-edit {
+      grid-area: edit;
+    }
+
+    .area-delete {
+      grid-area: delete;
+    }
 
     .action-button {
       border: none;

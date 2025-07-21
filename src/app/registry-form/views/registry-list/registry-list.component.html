@@ -1,19 +1,23 @@
 <div class="container">
   <h2 class="area-title">Listado de enviados</h2>
-  @for (entry of registryListMock; let i = $index; track entry.id) {
-    <div class="area-item">
-      <mat-icon>person</mat-icon>
-      <div >{{entry.name}}</div>
-      <div>{{entry.status}}</div>
 
-      <button class="action-button" mat-button (click)="handleEdit()">
-        <mat-icon class="edit-icon" >edit</mat-icon>
-      </button>
-      <button class="action-button" mat-button (click)="handleDelete()">
-        <mat-icon class="delete-icon" >delete_forever</mat-icon>
-      </button>
-    </div>
+  @for (entry of registryListMock; let i = $index; track entry.id) {
+  <div class="area-item">
+    <mat-icon class="area-person">person</mat-icon>
+    <div class="area-name">{{ entry.name }}</div>
+    <div class="area-status">{{ entry.status }}</div>
+
+    <button class="area-edit action-button" mat-button (click)="handleEdit()">
+      <mat-icon class="edit-icon">edit</mat-icon>
+    </button>
+    <button
+      class="area-delete action-button"
+      mat-button
+      (click)="handleDelete()"
+    >
+      <mat-icon class="delete-icon">delete_forever</mat-icon>
+    </button>
+  </div>
 
   }
 </div>
-

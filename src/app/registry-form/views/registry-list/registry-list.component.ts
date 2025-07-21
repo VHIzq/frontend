@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { faker } from '@faker-js/faker';
 
 @Component({
   selector: 'lra-registry-list',
@@ -9,21 +10,22 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
 
     //Material
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './registry-list.component.html',
   styleUrl: './registry-list.component.scss',
 })
 export class RegistryListComponent {
-handleEdit() {
-throw new Error('Method not implemented.');
-}
-handleDelete() {
-throw new Error('Method not implemented.');
-}
-  registryListMock = [
-    { id: 1, name: 'Registro 1', status: 'enviado' },
-    { id: 2, name: 'Registro 2', status: 'pendiente' },
-    { id: 3, name: 'Registro 3', status: 'eliminado' },
-  ];
+  registryListMock = Array.from({ length: 10 }).map((_, i) => ({
+    id: i + 1,
+    name: faker.person.fullName(),
+    status: faker.helpers.arrayElement(['enviado', 'pendiente', 'eliminado']),
+  }));
+
+  handleEdit() {
+    throw new Error('Method not implemented.');
+  }
+  handleDelete() {
+    throw new Error('Method not implemented.');
+  }
 }
