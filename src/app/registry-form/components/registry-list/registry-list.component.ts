@@ -38,7 +38,7 @@ export class RegistryListComponent {
 
   readonly dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
-  private durationInSeconds = 40;
+  private durationInSeconds = 4;
 
   handleEdit() {
     throw new Error('Method not implemented.');
