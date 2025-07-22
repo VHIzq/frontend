@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class="area-title">Listado de enviados</h2>
+  <h2 class="area-title">Lista de capturados</h2>
 
   @for (entry of entryList; let i = $index; track entry.id) {
   <div class="area-item">
@@ -18,6 +18,6 @@
       <mat-icon class="delete-icon">delete_forever</mat-icon>
     </button>
   </div>
-
+  <mat-divider></mat-divider>
   }
 </div>

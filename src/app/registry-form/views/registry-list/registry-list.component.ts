@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RegistryListModel } from './registry-list.model';
+import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
   selector: 'lra-registry-list',
@@ -11,6 +12,7 @@ import { RegistryListModel } from './registry-list.model';
 
     //Material
     MatIconModule,
+    MatDividerModule
   ],
   templateUrl: './registry-list.component.html',
   styleUrl: './registry-list.component.scss',

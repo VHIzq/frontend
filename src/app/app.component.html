@@ -1,3 +1,6 @@
 <div class="container">
+  @if (isAuthenticated) {
+    <strong class="area-servidor" >Servidor: {{ servidor }}</strong>
+  }
   <router-outlet></router-outlet>
 </div>
