@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegistryListComponent } from '../registry-list/registry-list.component';
+import { RegistryListComponent } from '../../components/registry-list/registry-list.component';
 import { faker } from '@faker-js/faker';
 import { CommonModule } from '@angular/common';
 

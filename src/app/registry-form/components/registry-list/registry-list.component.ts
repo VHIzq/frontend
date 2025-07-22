@@ -10,9 +10,10 @@ import {
 import { MatIconModule } from '@angular/material/icon';
 import { RegistryListModel } from './registry-list.model';
 import { MatDividerModule } from '@angular/material/divider';
-import { ConfirmDeleteEntryComponent } from '../../components/confirm-delete-entry/confirm-delete-entry.component';
+import { ConfirmDeleteEntryComponent } from '../confirm-delete-entry/confirm-delete-entry.component';
 import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'lra-registry-list',
@@ -23,6 +24,7 @@ import { take } from 'rxjs';
     //Material
     MatIconModule,
     MatDividerModule,
+    MatSnackBarModule,
   ],
   templateUrl: './registry-list.component.html',
   styleUrl: './registry-list.component.scss',
