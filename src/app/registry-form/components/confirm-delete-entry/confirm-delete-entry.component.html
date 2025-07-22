@@ -1,5 +1,5 @@
-<form [formGroup]="modal">
-  <mat-dialog-content class="container">
+<form [formGroup]="modal" class="container" >
+  <mat-dialog-content class="area-comments" >
     <mat-form-field>
       <mat-label>Comentarios</mat-label>
       <textarea
@@ -9,9 +9,6 @@
       ></textarea>
     </mat-form-field>
   </mat-dialog-content>
-
-  <mat-dialog-actions align="end">
-    <button class="area-cancel" mat-button mat-dialog-close (click)="handleCloseModal(false)">Cancelar</button>
-    <button class="area-delete" mat-button [disabled]="modal.invalid" (click)="handleCloseModal(true)">Borrar</button>
-  </mat-dialog-actions>
+  <button class="area-cancel" mat-button mat-dialog-close (click)="handleCloseModal(false)">Cancelar</button>
+  <button class="area-delete" mat-button [disabled]="modal.invalid" (click)="handleCloseModal(true)">Borrar</button>
 </form>

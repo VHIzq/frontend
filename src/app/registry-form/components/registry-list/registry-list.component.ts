@@ -3,7 +3,6 @@ import {
   Component,
   EventEmitter,
   inject,
-  Inject,
   Input,
   Output,
 } from '@angular/core';
@@ -13,7 +12,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { ConfirmDeleteEntryComponent } from '../confirm-delete-entry/confirm-delete-entry.component';
 import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ConfirmationSnackbarComponent } from '../confirmation-snackbar/confirmation-snackbar.component';
 
 @Component({
   selector: 'lra-registry-list',
@@ -37,15 +37,11 @@ export class RegistryListComponent {
   deleteEntry = new EventEmitter<number>();
 
   readonly dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
+  private durationInSeconds = 40;
 
   handleEdit() {
     throw new Error('Method not implemented.');
-  }
-
-  handleConfirmDelete(idEntry: number) {
-    const entryList = this.entryList.filter((entry) => entry.id !== idEntry);
-    this.entryList = entryList;
-    this.deleteEntry.emit(idEntry);
   }
 
   handleOpenModal(idEntry: number) {
@@ -58,8 +54,23 @@ export class RegistryListComponent {
       .pipe(take(1))
       .subscribe((shouldDelete: boolean) => {
         if (shouldDelete) {
-          this.handleConfirmDelete(idEntry);
+          this.confirmDelete(idEntry);
+
+          //TODO: Implement a service to handle the deletion of entries
+          this.openSnackBar();
         }
       });
+  }
+
+  private confirmDelete(idEntry: number) {
+    const entryList = this.entryList.filter((entry) => entry.id !== idEntry);
+    this.entryList = entryList;
+    this.deleteEntry.emit(idEntry);
+  }
+
+  private openSnackBar() {
+    this.snackBar.openFromComponent(ConfirmationSnackbarComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
   }
 }
