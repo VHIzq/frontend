@@ -23,7 +23,6 @@ export class PreviewFormComponent {
   ) {}
 
   handleSubmitForm() {
-    this.dialogRef.close(true);  
-
+    this.dialogRef.close(true);
   }
 }

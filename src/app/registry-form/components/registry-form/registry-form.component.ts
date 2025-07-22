@@ -76,7 +76,6 @@ export class RegistryFormComponent implements OnInit, OnDestroy {
       this.registryForm.markAllAsTouched();
       return;
     }
-    console.log('data', this.registryForm.value);
     this.formData.emit(this.registryForm.value);
   }
 
