@@ -1,15 +1,26 @@
 <div class="container">
   <mat-toolbar>
     <button
-      matIconButton
-      class="example-icon"
-      aria-label="Example icon-button with menu icon"
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      class="icon-menu"
+      aria-label="Menú de navegación"
     >
       <mat-icon>menu</mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/registry-form']">
+        <mat-icon>assignment</mat-icon>
+        <span>Registro</span>
+      </button>
+      <button mat-menu-item [routerLink]="['/registry-list']">
+        <mat-icon>list</mat-icon>
+        <span>Lista de Registros</span>
+      </button>
+    </mat-menu>
     <span class="spacer"></span>
     @if (isAuthenticated) {
-    <strong class="area-servidor">Servidor: {{ servidor }}</strong>
+      <strong class="area-servidor">Servidor: {{ servidor }}</strong>
     }
   </mat-toolbar>
 </div>
