@@ -1,4 +1,4 @@
-export namespace RegistryFormView {
+export namespace Registry {
   export interface RegistryFormViewModelPayload {
     name?: string;
     firstLastName?: string | null;
@@ -26,9 +26,10 @@ export namespace RegistryFormView {
     pastor?: string | null;
     discipulador?: string | null;
     comments?: string | null;
+    entryId?: number | null;
   }
 
   export interface EntryIdPayload {
-    id: number;
+    entryId: number;
   }
 }

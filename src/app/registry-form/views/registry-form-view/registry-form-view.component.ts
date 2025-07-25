@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { RegistryFormComponent } from '../../components/registry-form/registry-form.component';
 import { RegistryForm } from '../../components/registry-form/registry-form.model';
 import { Store } from '@ngxs/store';
-import { AddRegistryFormView } from '../../../store/registry-form-view/registry-form-view.action';
+import { AddNewEntry } from '../../../store/registry/registry.actions';
 
 @Component({
   selector: 'lra-registry-form-view',
@@ -17,7 +17,6 @@ export class RegistryFormViewComponent {
   private store = inject(Store);
 
   handleOnSubmitNewEntry(formData: RegistryForm.FormDataModel) {
-    console.log('data - parent', formData);
-    this.store.dispatch(new AddRegistryFormView(formData));
+    this.store.dispatch(new AddNewEntry(formData));
   }
 }
