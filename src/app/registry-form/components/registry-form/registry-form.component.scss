@@ -3,8 +3,7 @@
   grid-template-areas:
     " title "
     " form  ";
-  gap: 1rem;
-  grid-template-rows: min-content auto;
+  grid-template-rows: min-content min-content;
 
   .area-title {
     grid-area:  title;

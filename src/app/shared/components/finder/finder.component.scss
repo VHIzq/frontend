@@ -1,0 +1,9 @@
+.container {
+  width: 100%;
+}
+
+:host ::ng-deep .container {
+  .mat-mdc-form-field {
+    width: 100%;
+  }
+}
