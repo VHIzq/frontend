@@ -1,10 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { State, Action, Selector, StateContext } from '@ngxs/store';
-import { AddNewEntry, RegistryAction } from './registry.actions';
+import { AddNewEntry, GetEntryList, RegistryAction } from './registry.actions';
 import { RegistryService } from './registry.service';
+import { Registry } from './registry.model';
 
 export interface RegistryStateModel {
   items: string[];
+  entryList: Array<Registry.RegistryFormViewModelPayload>;
 }
 
 @State<RegistryStateModel>({
@@ -20,6 +22,11 @@ export class RegistryState {
   @Selector()
   static getState(state: RegistryStateModel) {
     return state;
+  }
+
+  @Action(GetEntryList)
+  getEntryList(ctx: StateContext<RegistryStateModel>) {
+    
   }
 
   @Action(AddNewEntry)
