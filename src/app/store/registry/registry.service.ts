@@ -29,8 +29,8 @@ export class RegistryService {
     const data = localStorage.getItem(this.storageKey);
     if (!data) {
       return [];
-    } else {
-      return JSON.parse(data) || [];
     }
+
+    return JSON.parse(data) || [];
   }
 }
