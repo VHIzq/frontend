@@ -25,6 +25,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
+  private fb = inject(FormBuilder);
 
   @Output()
   newUser = new EventEmitter<SignupModel.EntryUser>();
@@ -33,19 +34,19 @@ export class SignupComponent implements OnInit {
     this.setupSignupForm();
   }
 
-  handleOnSignup(entryUser: SignupModel.EntryUser) {
-    this.newUser.emit(entryUser);
+  handleOnSignup() {
+    this.newUser.emit(this.signupForm.value);
   }
 
-  private fb = inject(FormBuilder);
 
   private setupSignupForm() {
     this.signupForm = this.fb.group({
-      cellphone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-      name: ['', Validators.required],
-      lastName: ['', Validators.required],
-      secondLastName: [''],
-      email: ['', Validators.email],
+      cellphone: ['5514174938', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      name: ['Victor H', Validators.required],
+      lastName: ['Magdaleno', Validators.required],
+      secondLastName: ['Izquierdo'],
+      email: ['vhmizq@gmail.com', Validators.email],
+      password: ['er340c##JNF', [Validators.required, Validators.minLength(8)]]
     });
   }
 }

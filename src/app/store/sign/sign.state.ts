@@ -28,6 +28,7 @@ export class SignState {
     ctx: StateContext<SignStateModel>,
     { payload }: CreateEntryUser
   ) {
+    console.log('payload - state', payload);
     return this.signService.createNewEntryUser(payload);
   }
 }

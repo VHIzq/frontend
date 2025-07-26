@@ -13,10 +13,10 @@ import { from, Observable } from 'rxjs';
 export class SignService {
   auth = getAuth();
 
-  constructor() {}
   createNewEntryUser(
     payload: Sign.EntryUserPayload
   ): Observable<UserCredential> {
+    console.log('service');
     return from(
       createUserWithEmailAndPassword(this.auth, payload.email, payload.password)
     );

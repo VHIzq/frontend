@@ -1,7 +1,7 @@
 <form
   class="container"
   [formGroup]="signupForm"
-  (ngSubmit)="handleOnSignup($event)"
+  (ngSubmit)="handleOnSignup()"
 >
   <mat-form-field appearance="fill">
     <mat-label>Celular</mat-label>
@@ -55,11 +55,21 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill">
-    <mat-label>Correo electrónico (opcional)</mat-label>
+    <mat-label>Correo electrónico</mat-label>
     <input matInput formControlName="email" placeholder="correo@ejemplo.com" />
 
     @if (signupForm.get('email')?.hasError('email')) {
     <mat-error>Ingresa un correo válido</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Contraseña</mat-label>
+    <input type="password" matInput formControlName="password"/>
+    <mat-hint>Minimo ocho caracteres</mat-hint>
+
+    @if (signupForm.get('password')?.hasError('password')) {
+    <mat-error>Debe contener ocho caracteres como minimo</mat-error>
     }
   </mat-form-field>
 

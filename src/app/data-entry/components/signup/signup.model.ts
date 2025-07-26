@@ -5,5 +5,6 @@ export namespace SignupModel {
     secondLastName: string;
     cellphone: string;
     email: string;
+    password: string;
   }
 }

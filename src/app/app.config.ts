@@ -13,6 +13,10 @@ import { provideStore } from '@ngxs/store';
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { firebaseConfig } from '../environments/firebase.config';
+import { SignState } from './store/sign/sign.state';
+import { RegistryState } from './store/registry/registry.state';
+import { DashboardState } from './store/dashboard/dashboard.state';
+import { provideHttpClient } from '@angular/common/http';
 
 const app = initializeApp(firebaseConfig);
 getAnalytics(app);
@@ -22,7 +26,11 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideNativeDateAdapter(),
-    provideStore([], withNgxsReduxDevtoolsPlugin()),
+    provideHttpClient(),
+    provideStore(
+      [SignState, RegistryState, DashboardState],
+      withNgxsReduxDevtoolsPlugin()
+    ),
   ],
 };
 function provideNativeDateAdapter():
