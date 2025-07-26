@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { RegistryFormViewComponent } from './data-entry/views/registry-form-view/registry-form-view.component';
 import { RegistryListViewComponent } from './data-entry/views/registry-list-view/registry-list-view.component';
-import { SignupComponentView } from './data-entry/views/signup/signup.component.view';
+import { SignupComponentView } from './data-entry/views/signup-view/signup.component.view';
 
 export const routes: Routes = [
   {
