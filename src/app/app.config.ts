@@ -10,6 +10,12 @@ import { MatNativeDateModule, NativeDateAdapter } from '@angular/material/core';
 import { routes } from './app.routes';
 import { withNgxsReduxDevtoolsPlugin } from '@ngxs/devtools-plugin';
 import { provideStore } from '@ngxs/store';
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
+import { firebaseConfig } from '../environments/firebase.config';
+
+const app = initializeApp(firebaseConfig);
+getAnalytics(app);
 
 export const appConfig: ApplicationConfig = {
   providers: [
