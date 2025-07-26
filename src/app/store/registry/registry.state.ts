@@ -26,6 +26,13 @@ export class RegistryState {
     return state;
   }
 
+  @Selector()
+  static getEntryList(
+    state: RegistryStateModel
+  ): Array<Registry.RegistryFormViewModelPayload> {
+    return state.entryList;
+  }
+
   @Action(GetEntryList)
   getEntryList(ctx: StateContext<RegistryStateModel>) {
     return this.dataService

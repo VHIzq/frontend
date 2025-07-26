@@ -7,7 +7,9 @@ import {
   DeleteEntry,
   GetEntryList,
 } from '../../../store/registry/registry.actions';
-import { RegistryListModel } from '../../components/registry-list/registry-list.model';
+import { RegistryState } from '../../../store/registry/registry.state';
+import { Observable } from 'rxjs';
+import { RegistryForm } from '../../components/registry-form/registry-form.model';
 
 @Component({
   selector: 'lra-registry-list-view',
@@ -16,8 +18,12 @@ import { RegistryListModel } from '../../components/registry-list/registry-list.
   styleUrl: './registry-list-view.component.scss',
 })
 export class RegistryListViewComponent implements OnInit {
-  entryList = this.setupEntryList();
   private store = inject(Store);
+
+  entryList = this.setupEntryList();
+  entryList$: Observable<Array<RegistryForm.FormDataModel>> = this.store.select(
+    RegistryState.getEntryList
+  );
 
   ngOnInit(): void {
     this.setupEntryList();

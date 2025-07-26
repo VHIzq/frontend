@@ -49,8 +49,6 @@ export class RegistryListComponent {
       .subscribe((shouldDelete: boolean) => {
         if (shouldDelete) {
           this.confirmDelete(idEntry);
-
-          //TODO: Implement a service to handle the deletion of entries
           this.openSnackBar();
         }
       });
