@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RegistryStateModel } from './registry.state';
 import { Observable } from 'rxjs';
 import { Registry } from './registry.model';
 

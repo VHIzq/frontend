@@ -3,9 +3,10 @@ import { State, Action, Selector, StateContext } from '@ngxs/store';
 import { AddNewEntry, GetEntryList } from './registry.actions';
 import { RegistryService } from './registry.service';
 import { Registry } from './registry.model';
+import { Observable, tap } from 'rxjs';
 
 export interface RegistryStateModel {
-  items: string[];
+  items: Array<Registry.RegistryFormViewModelPayload>;
   entryList: Array<Registry.RegistryFormViewModelPayload>;
 }
 
@@ -35,14 +36,18 @@ export class RegistryState {
   }
 
   @Action(AddNewEntry)
-  addNewEntry(ctx: StateContext<RegistryStateModel>, { payload }: AddNewEntry) {
-    return this.dataService.addNewEntry(payload).subscribe((response) => {
-      const stateModel = ctx.getState();
-      stateModel.items = [...stateModel.items, response];
-      ctx.setState({
-        ...stateModel,
-        items: [...stateModel.items, response],
-      });
-    });
+  addNewEntry(
+    ctx: StateContext<RegistryStateModel>,
+    { payload }: AddNewEntry
+  ): Observable<Registry.RegistryFormViewModelPayload> {
+    return this.dataService.addNewEntry(payload).pipe(
+      tap((response) => {
+        const stateModel = ctx.getState();
+        ctx.setState({
+          ...stateModel,
+          items: [...stateModel.items, response],
+        });
+      })
+    );
   }
 }

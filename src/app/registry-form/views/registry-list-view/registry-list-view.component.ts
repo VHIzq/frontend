@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RegistryListComponent } from '../../components/registry-list/registry-list.component';
 import { faker } from '@faker-js/faker';
 import { CommonModule } from '@angular/common';
+import { Store } from '@ngxs/store';
+import { GetEntryList } from '../../../store/registry/registry.actions';
 
 @Component({
   selector: 'lra-registry-list-view',
@@ -11,9 +13,11 @@ import { CommonModule } from '@angular/common';
 })
 export class RegistryListViewComponent implements OnInit {
   entryList = this.setupEntryList();
+  private store = inject(Store);
 
   ngOnInit(): void {
     this.setupEntryList();
+    this.setupGetEntryList();
   }
 
   deleteEntry($entryId: number) {
@@ -30,5 +34,9 @@ export class RegistryListViewComponent implements OnInit {
     }));
 
     return registryListMock;
+  }
+
+  private setupGetEntryList() {
+    this.store.dispatch(new GetEntryList());
   }
 }
