@@ -5,5 +5,6 @@ export namespace Sign {
     secondLastName: string;
     cellphone: string;
     email: string;
+    password: string;
   }
 }
