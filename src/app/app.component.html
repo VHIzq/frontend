@@ -1,5 +1,7 @@
 <div class="container">
+  @if (isAuthenticated) {
   <lra-menu-toolbar />
   <lra-finder />
+  }
   <router-outlet></router-outlet>
 </div>

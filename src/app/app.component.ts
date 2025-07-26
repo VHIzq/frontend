@@ -9,4 +9,7 @@ import { FinderComponent } from './shared/components/finder/finder.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {}
+export class AppComponent {
+  //TODO: add service to handle authentication
+  isAuthenticated = false;
+}
