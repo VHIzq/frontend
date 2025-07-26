@@ -11,5 +11,5 @@ export class AddNewEntry {
 
 export class DeleteEntry {
   static readonly type = '[RegistryFormView] Delete entry from list';
-  constructor(public payload: Registry.EntryIdPayload) {}
+  constructor(public payload: number) {}
 }

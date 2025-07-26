@@ -3,7 +3,11 @@ import { RegistryListComponent } from '../../components/registry-list/registry-l
 import { faker } from '@faker-js/faker';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngxs/store';
-import { GetEntryList } from '../../../store/registry/registry.actions';
+import {
+  DeleteEntry,
+  GetEntryList,
+} from '../../../store/registry/registry.actions';
+import { RegistryListModel } from '../../components/registry-list/registry-list.model';
 
 @Component({
   selector: 'lra-registry-list-view',
@@ -20,9 +24,8 @@ export class RegistryListViewComponent implements OnInit {
     this.setupGetEntryList();
   }
 
-  deleteEntry($entryId: number) {
-    //TODO: Implement dispatch to delete an entry
-    console.log('data to delete', $entryId);
+  deleteEntry(entryId: number) {
+    this.store.dispatch(new DeleteEntry(entryId));
   }
 
   private setupEntryList() {

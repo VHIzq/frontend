@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { State, Action, Selector, StateContext } from '@ngxs/store';
-import { AddNewEntry, GetEntryList } from './registry.actions';
+import { AddNewEntry, DeleteEntry, GetEntryList } from './registry.actions';
 import { RegistryService } from './registry.service';
 import { Registry } from './registry.model';
 import { Observable, tap } from 'rxjs';
@@ -49,5 +49,13 @@ export class RegistryState {
         });
       })
     );
+  }
+
+  @Action(DeleteEntry)
+  deleteEntry(
+    ctx: StateContext<RegistryStateModel>,
+    { payload }: DeleteEntry
+  ): Observable<void> {
+    return this.dataService.deleteEntry(payload);
   }
 }

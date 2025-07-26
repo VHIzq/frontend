@@ -6,4 +6,8 @@ export namespace RegistryListModel {
   }
 
   export type STATUS = 'enviado' | 'pendiente' | 'eliminado';
+
+  export interface EntryIdPayload {
+    entryId: number;
+  }
 }

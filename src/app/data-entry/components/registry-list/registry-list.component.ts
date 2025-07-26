@@ -1,11 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  EventEmitter,
-  inject,
-  Input,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RegistryListModel } from './registry-list.model';
 import { MatDividerModule } from '@angular/material/divider';
@@ -63,7 +57,9 @@ export class RegistryListComponent {
   }
 
   private confirmDelete(idEntry: number) {
-    const entryList = this.entryList.filter((entry) => entry.id !== idEntry);
+    const entryList = this.entryList.filter(
+      (entry) => entry.id !== idEntry
+    );
     this.entryList = entryList;
     this.deleteEntry.emit(idEntry);
   }
