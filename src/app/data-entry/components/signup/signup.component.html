@@ -1,1 +1,74 @@
-<p>signup works!</p>
+<form
+  class="container"
+  [formGroup]="signupForm"
+  (ngSubmit)="handleOnSignup($event)"
+>
+  <mat-form-field appearance="fill">
+    <mat-label>Celular</mat-label>
+    <input
+      matInput
+      formControlName="cellphone"
+      placeholder="Ej. 5512345678"
+      required
+    />
+
+    @if (signupForm.get('cellphone')?.hasError('required')) {
+    <mat-error>El celular es obligatorio</mat-error>
+    }
+
+    @if (signupForm.get('cellphone')?.hasError('pattern')) {
+    <mat-error>Ingresa un número válido de 10 dígitos</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="name" placeholder="Tu nombre" required />
+
+    @if (signupForm.get('name')?.hasError('required')) {
+    <mat-error> El nombre es obligatorio </mat-error>
+
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Apellido paterno</mat-label>
+    <input
+      matInput
+      formControlName="lastName"
+      placeholder="Apellido paterno"
+      required
+    />
+
+    @if (signupForm.get('lastName')?.hasError('required')) {
+    <mat-error>El apellido paterno es obligatorio</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Apellido materno</mat-label>
+    <input
+      matInput
+      formControlName="secondLastName"
+      placeholder="Apellido materno"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Correo electrónico (opcional)</mat-label>
+    <input matInput formControlName="email" placeholder="correo@ejemplo.com" />
+
+    @if (signupForm.get('email')?.hasError('email')) {
+    <mat-error>Ingresa un correo válido</mat-error>
+    }
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="signupForm.invalid"
+  >
+    Registrarse
+  </button>
+</form>
