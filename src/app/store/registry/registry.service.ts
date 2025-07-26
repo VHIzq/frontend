@@ -25,6 +25,12 @@ export class RegistryService {
     localStorage.setItem(this.storageKey, JSON.stringify(updatedEntries));
   }
 
+  getEntryList(): Observable<Array<Registry.RegistryFormViewModelPayload>> {
+    return this.http.get<Array<Registry.RegistryFormViewModelPayload>>(
+      this.apiUrl
+    );
+  }
+
   getRegistryEntriesFromStorage(): Array<Registry.RegistryFormViewModelPayload> {
     const data = localStorage.getItem(this.storageKey);
     if (!data) {

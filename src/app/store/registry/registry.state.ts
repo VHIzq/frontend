@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { State, Action, Selector, StateContext } from '@ngxs/store';
-import { AddNewEntry, GetEntryList, RegistryAction } from './registry.actions';
+import { AddNewEntry, GetEntryList } from './registry.actions';
 import { RegistryService } from './registry.service';
 import { Registry } from './registry.model';
 
@@ -13,6 +13,7 @@ export interface RegistryStateModel {
   name: 'registry',
   defaults: {
     items: [],
+    entryList: [],
   },
 })
 @Injectable()
@@ -26,7 +27,11 @@ export class RegistryState {
 
   @Action(GetEntryList)
   getEntryList(ctx: StateContext<RegistryStateModel>) {
-    
+    return this.dataService
+      .getEntryList()
+      .subscribe((response: Array<Registry.RegistryFormViewModelPayload>) => {
+        ctx.patchState({ entryList: response });
+      });
   }
 
   @Action(AddNewEntry)
@@ -34,7 +39,10 @@ export class RegistryState {
     return this.dataService.addNewEntry(payload).subscribe((response) => {
       const stateModel = ctx.getState();
       stateModel.items = [...stateModel.items, response];
-      ctx.setState(stateModel);
+      ctx.setState({
+        ...stateModel,
+        items: [...stateModel.items, response],
+      });
     });
   }
 }
