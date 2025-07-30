@@ -26,5 +26,6 @@ export namespace DashboardModel {
     pastor: string | null;
     discipulador: string | null;
     comments: string | null;
+    rowDataId: string;
   }
 }
