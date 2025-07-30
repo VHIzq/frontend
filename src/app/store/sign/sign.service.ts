@@ -29,4 +29,8 @@ export class SignService {
       signInWithEmailAndPassword(this.auth, userData.email, userData.password)
     );
   }
+
+  logoutUser() {
+    return from(this.auth.signOut());
+  }
 }

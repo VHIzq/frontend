@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { State, Action, Selector, StateContext } from '@ngxs/store';
-import { CreateEntryUser, LoginUser } from './sign.actions';
+import { CreateEntryUser, LoginUser, LogoutUser } from './sign.actions';
 import { SignService } from './sign.service';
 import { Sign } from './sign.model';
 
@@ -69,6 +69,24 @@ export class SignState {
         ctx.patchState({
           isLoggedIn: false,
           user: null,
+        });
+      },
+    });
+  }
+
+  @Action(LogoutUser)
+  logoutUser(ctx: StateContext<SignStateModel>) {
+    return this.signService.logoutUser().subscribe({
+      next: () => {
+        ctx.patchState({
+          isLoggedIn: false,
+          user: null,
+        });
+      },
+      error: () => {
+        ctx.patchState({
+          isLoggedIn: true,
+          user: ctx.getState().user,
         });
       },
     });

@@ -18,7 +18,7 @@ export const routes: Routes = [
     path: 'registry-list',
     title: 'Lista de Registros',
     component: RegistryListViewComponent,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'signup',

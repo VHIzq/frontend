@@ -16,9 +16,8 @@ import { SignState } from './store/sign/sign.state';
 export class AppComponent {
   private store = inject(Store);
 
-  //TODO: add service to handle authentication
-  /* isAuthenticated$: Observable<boolean> = this.store.select(
+  isAuthenticated$: Observable<boolean> = this.store.select(
     SignState.isLoggedIn
-  ); */
-  isAuthenticated$ = true;
+  );
+  // isAuthenticated$ = true;
 }
