@@ -32,7 +32,7 @@ export class DashboardState {
 
   @Action(GetDashboardData)
   getDashboardData(ctx: StateContext<DashboardStateModel>) {
-    return this.dataService.getDashboardData().subscribe((data) => {
+    return this.dataService.mockGetDashboardData().subscribe((data) => {
       ctx.patchState({ dashboardData: data });
     });
   }

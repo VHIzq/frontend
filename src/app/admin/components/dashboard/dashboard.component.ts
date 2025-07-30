@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,12 +26,15 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnChanges {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.handleOnDashboardChange(changes);
+  }
   @Output()
   deleteRowId = new EventEmitter<string>();
 
   @Input()
-  getDashboardData!: Array<DashboardModel.RowData>;
+  dashboardData!: Array<DashboardModel.RowData>;
 
   columnHeaders: Array<string> = [
     'Nombre',
@@ -86,43 +96,13 @@ export class DashboardComponent {
     'delete',
   ];
 
-  mockData: DashboardModel.RowData[] = Array.from({ length: 20 }).map(() => {
-    const date = faker.date.past();
+  dataSource = new MatTableDataSource(this.dashboardData);
 
-    return {
-      name: faker.person.firstName(),
-      firstLastName: faker.person.lastName(),
-      secondsLastName: faker.person.lastName(),
-      age: faker.number.int({ min: 18, max: 80 }),
-      email: faker.internet.email(),
-      cellphone: faker.phone.number(),
-      entryTipe: faker.helpers.arrayElement(['fiesta', 'reunión', 'evento']),
-      invitedBy: faker.person.fullName(),
-      visitDay: faker.date.weekday(),
-      visitTime: faker.date
-        .soon()
-        .toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      street: faker.location.street(),
-      streetNumber: faker.string.numeric(2),
-      zipCode: faker.location.zipCode('#####'),
-      referende: faker.location.secondaryAddress(),
-      region: faker.location.city(),
-      state: faker.location.state(),
-      houseNumber: faker.string.numeric(3),
-      sex: faker.helpers.arrayElement(['M', 'F']),
-      peaceHouseLeader: faker.person.fullName(),
-      peaceHouseNumber: faker.string.numeric(2),
-      isFirstTimeVisit: faker.datatype.boolean(),
-      dateFirstTimeVisit: date,
-      network: faker.company.name(),
-      pastor: faker.person.fullName(),
-      discipulador: faker.person.fullName(),
-      comments: faker.lorem.sentence(),
-      rowDataId: faker.string.uuid(),
-    };
-  });
-
-  dataSource = new MatTableDataSource(this.mockData);
+  handleOnDashboardChange(changes: SimpleChanges) {
+    if (changes['dashboardData'] && changes['dashboardData'].currentValue) {
+      this.dataSource.data = changes['dashboardData'].currentValue;
+    }
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event?.target as HTMLInputElement).value;
@@ -130,11 +110,11 @@ export class DashboardComponent {
   }
 
   handleOnDelete(row: DashboardModel.RowData) {
-    this.mockData = this.mockData.filter(
+    this.dashboardData = this.dashboardData.filter(
       (item) => item.rowDataId !== row.rowDataId
     );
 
-    this.dataSource.data = this.mockData;
+    this.dataSource.data = this.dashboardData;
 
     this.deleteRowId.emit(row.rowDataId);
   }
