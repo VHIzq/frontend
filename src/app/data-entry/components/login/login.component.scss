@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--spacing-sm);
+  max-width: 725px;
+
+  .action-submit {
+    margin-top: auto;
+    align-self: center;
+  }
+}

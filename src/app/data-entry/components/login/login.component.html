@@ -1,1 +1,30 @@
-<p>login works!</p>
+<form class="container" [formGroup]="loginForm" (ngSubmit)="handleOnLogin()" >
+  <mat-form-field appearance="fill">
+    <mat-label>Correo electrónico</mat-label>
+    <input matInput formControlName="email" placeholder="correo@ejemplo.com" />
+
+    @if (loginForm.get('email')?.hasError('email')) {
+    <mat-error>Ingresa un correo válido</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Contraseña</mat-label>
+    <input type="password" matInput formControlName="password" />
+    <mat-hint>Minimo ocho caracteres</mat-hint>
+
+    @if (loginForm.get('password')?.hasError('password')) {
+    <mat-error>Debe contener ocho caracteres como minimo</mat-error>
+    }
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    class="action-submit"
+    type="submit"
+    [disabled]="loginForm.invalid"
+  >
+    Registrarse
+  </button>
+</form>
