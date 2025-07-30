@@ -7,7 +7,6 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { from, Observable } from 'rxjs';
-import { LoginModel } from '../../data-entry/components/login/login.model';
 
 @Injectable({
   providedIn: 'root',
