@@ -29,6 +29,5 @@ export const routes: Routes = [
     path: 'login',
     title: 'Login',
     component: LoginComponentView,
-    canActivate: [guestGuard],
   },
 ];
