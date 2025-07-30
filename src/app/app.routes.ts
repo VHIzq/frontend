@@ -4,6 +4,7 @@ import { RegistryListViewComponent } from './data-entry/views/registry-list-view
 import { SignupComponentView } from './data-entry/views/signup-view/signup.component.view';
 import { LoginComponentView } from './data-entry/views/login-view/login.component.view';
 import { authGuard } from './guards/auth.guard';
+import { AdminViewComponent } from './admin/views/admin-view/admin-view.component';
 
 export const routes: Routes = [
   {
@@ -29,4 +30,9 @@ export const routes: Routes = [
     title: 'Login',
     component: LoginComponentView,
   },
+  {
+    path: 'admin',
+    title: 'Admin',
+    component: AdminViewComponent
+  }
 ];
