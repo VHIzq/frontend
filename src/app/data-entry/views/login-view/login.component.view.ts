@@ -3,6 +3,7 @@ import { LoginComponent } from '../../components/login/login.component';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngxs/store';
 import { LoginModel } from '../../components/login/login.model';
+import { LoginUser } from '../../../store/sign/sign.actions';
 
 @Component({
   selector: 'lra-login-view',
@@ -14,7 +15,6 @@ export class LoginComponentView {
   private store = inject(Store);
 
   handleOnLogin(userData: LoginModel.LoginUser) {
-    console.log('user data', userData);
-    //TODO: add logic to dispatch an action when user logins
+    this.store.dispatch(new LoginUser(userData));
   }
 }

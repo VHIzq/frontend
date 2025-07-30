@@ -11,7 +11,6 @@
   <mat-form-field>
     <mat-label>Contraseña</mat-label>
     <input type="password" matInput formControlName="password" />
-    <mat-hint>Minimo ocho caracteres</mat-hint>
 
     @if (loginForm.get('password')?.hasError('password')) {
     <mat-error>Debe contener ocho caracteres como minimo</mat-error>
@@ -25,6 +24,6 @@
     type="submit"
     [disabled]="loginForm.invalid"
   >
-    Registrarse
+    Entrar
   </button>
 </form>

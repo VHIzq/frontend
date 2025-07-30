@@ -7,4 +7,9 @@ export namespace Sign {
     email: string;
     password: string;
   }
+
+  export interface LoginUserPayload {
+    email: string;
+    password: string;
+  }
 }

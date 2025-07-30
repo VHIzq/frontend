@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { State, Action, Selector, StateContext } from '@ngxs/store';
-import { CreateEntryUser } from './sign.actions';
+import { CreateEntryUser, LoginUser } from './sign.actions';
 import { SignService } from './sign.service';
 import { Sign } from './sign.model';
 
@@ -28,7 +28,11 @@ export class SignState {
     ctx: StateContext<SignStateModel>,
     { payload }: CreateEntryUser
   ) {
-    console.log('payload - state', payload);
     return this.signService.createNewEntryUser(payload);
+  }
+
+  @Action(LoginUser)
+  loginUser(ctx: StateContext<SignStateModel>, { payload }: LoginUser) {
+    return this.signService.loginWithEmailAndPassword(payload);
   }
 }
