@@ -1,29 +1,39 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { State, Action, Selector, StateContext } from '@ngxs/store';
-import { DashboardAction } from './dashboard.actions';
+import { GetDashboardData } from './dashboard.actions';
+import { DashboardModel } from './dashboard.model';
+import { DashboardService } from './dashboard.service';
 
 export interface DashboardStateModel {
-  items: string[];
+  dashboardData: Array<DashboardModel.RowData>;
 }
 
 @State<DashboardStateModel>({
   name: 'dashboard',
   defaults: {
-    items: []
-  }
+    dashboardData: [],
+  },
 })
 @Injectable()
 export class DashboardState {
+  private dataService = inject(DashboardService);
 
   @Selector()
   static getState(state: DashboardStateModel) {
     return state;
   }
 
-  @Action(DashboardAction)
-  add(ctx: StateContext<DashboardStateModel>, { payload }: DashboardAction) {
-    const stateModel = ctx.getState();
-    stateModel.items = [...stateModel.items, payload];
-    ctx.setState(stateModel);
+  @Selector()
+  static getDashboardData(
+    state: DashboardStateModel
+  ): Array<DashboardModel.RowData> {
+    return state.dashboardData;
+  }
+
+  @Action(GetDashboardData)
+  getDashboardData(ctx: StateContext<DashboardStateModel>) {
+    return this.dataService.getDashboardData().subscribe((data) => {
+      ctx.patchState({ dashboardData: data });
+    });
   }
 }

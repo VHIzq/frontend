@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,6 +22,9 @@ import { MatIconModule } from '@angular/material/icon';
 export class DashboardComponent {
   @Output()
   deleteRowId = new EventEmitter<string>();
+
+  @Input()
+  getDashboardData!: Array<DashboardModel.RowData>;
 
   columnHeaders: Array<string> = [
     'Nombre',

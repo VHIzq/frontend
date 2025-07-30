@@ -1,2 +1,4 @@
+@let getDashboardData = getDashboardData$ | async;
+
 <h3 class="title">Registro de Fiesta de Nuevos Creyentes</h3>
-<lra-dashboard />
+<lra-dashboard [getDashboardData]="getDashboardData ?? []" />
