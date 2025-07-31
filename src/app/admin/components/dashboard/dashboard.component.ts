@@ -10,7 +10,6 @@ import {
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { faker } from '@faker-js/faker';
 import { DashboardModel } from './dashboard.model';
 import { MatIconModule } from '@angular/material/icon';
 

@@ -1,23 +1,37 @@
 <div class="container">
   <h2 class="area-title">Entradas</h2>
+  <mat-form-field>
+    <mat-label>Filtrar </mat-label>
+    <input matInput (keyup)="applyFilter($event)" #input />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <table mat-table [dataSource]="entryList" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let entry">{{ entry.name }}</td>
+    </ng-container>
 
-  @for (entry of entryList; let i = $index; track entry.id) {
-  <div class="area-item">
-    <mat-icon class="area-person">person</mat-icon>
-    <div class="area-name">{{ entry.name }}</div>
-    <div class="area-status">{{ entry.status }}</div>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Estatus</th>
+      <td mat-cell *matCellDef="let entry">{{ entry.status }}</td>
+    </ng-container>
 
-    <button class="area-edit action-button" mat-button (click)="handleEdit()">
-      <mat-icon class="edit-icon">edit</mat-icon>
-    </button>
-    <button
-      class="area-delete action-button"
-      mat-button
-      (click)="handleOpenModal(entry.id)"
-    >
-      <mat-icon class="delete-icon">delete_forever</mat-icon>
-    </button>
-  </div>
-  <mat-divider></mat-divider>
-  }
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let entry">
+        <button class="action-button" mat-button (click)="handleEdit()">
+          <mat-icon class="edit-icon">edit</mat-icon>
+        </button>
+        <button
+          class="action-button"
+          mat-button
+          (click)="handleOpenModal(entry.id)"
+        >
+          <mat-icon class="delete-icon">delete_forever</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 </div>
