@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { State, Action, Selector, StateContext } from '@ngxs/store';
-import { GetDashboardData } from './dashboard.actions';
+import { DeleteDashboardEntry, GetDashboardData } from './dashboard.actions';
 import { DashboardModel } from './dashboard.model';
 import { DashboardService } from './dashboard.service';
 
@@ -35,5 +35,17 @@ export class DashboardState {
     return this.dataService.mockGetDashboardData().subscribe((data) => {
       ctx.patchState({ dashboardData: data });
     });
+  }
+
+  @Action(DeleteDashboardEntry)
+  deleteDashboardEntry(
+    ctx: StateContext<DashboardStateModel>,
+    action: DeleteDashboardEntry
+  ) {
+    return this.dataService
+      .deleteDashboardEntry({ idEntry: action.payload })
+      .subscribe(() => {
+        ctx.dispatch(new GetDashboardData());
+      });
   }
 }

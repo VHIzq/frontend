@@ -5,6 +5,7 @@ import { SignupComponentView } from './data-entry/views/signup-view/signup.compo
 import { LoginComponentView } from './data-entry/views/login-view/login.component.view';
 import { authGuard } from './guards/auth.guard';
 import { AdminViewComponent } from './admin/views/admin-view/admin-view.component';
+import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     title: 'Admin',
-    component: AdminViewComponent
+    component: AdminViewComponent,
+    canActivate: [adminGuard],
   }
 ];

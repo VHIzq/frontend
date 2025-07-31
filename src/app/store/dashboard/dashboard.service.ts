@@ -16,6 +16,12 @@ export class DashboardService {
     return this.http.get<Array<DashboardModel.RowData>>(this.apiUrl);
   }
 
+  deleteDashboardEntry(params: { idEntry: string }) {
+    return this.http.delete(this.apiUrl, {
+      body: { idEntry: params.idEntry },
+    });
+  }
+
   mockGetDashboardData() {
     return of(mockDashboardData);
   }
