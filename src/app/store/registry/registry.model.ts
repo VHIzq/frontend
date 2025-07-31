@@ -1,6 +1,6 @@
 export namespace Registry {
   export interface RegistryFormViewModelPayload {
-    name?: string;
+    name: string;
     firstLastName?: string | null;
     secondsLastName?: string | null;
     age?: number | null;
@@ -27,6 +27,10 @@ export namespace Registry {
     discipulador?: string | null;
     comments?: string | null;
     entryId?: number | null;
+    status: string | null;
+    createdAt?: Date | null;
+    addBy?: string | null;
+    rowDataId: string | null;
   }
 
   export interface EntryIdPayload {

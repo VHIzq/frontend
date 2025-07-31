@@ -1,5 +1,6 @@
 export namespace RegistryForm {
   export interface FormDataModel {
+    rowDataId: string | null;
     name?: string;
     firstLastName?: string | null;
     secondsLastName?: string | null;
@@ -26,5 +27,9 @@ export namespace RegistryForm {
     pastor?: string | null;
     discipulador?: string | null;
     comments?: string | null;
+    status: string | null;
+    createdAt?: Date | null;
+    addBy?: string | null;
+    deleteReason?: string | null;
   }
 }

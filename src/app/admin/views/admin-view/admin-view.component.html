@@ -4,7 +4,10 @@
 
 <mat-drawer-container>
   <mat-drawer #drawer mode="side" position="end" [opened]="shouldOpenDrawer">
-    <lra-registry-form />
+    <lra-registry-form
+      [formDataToEdit]="selectedEntryForForm"
+      (formData)="handleOnFormSubmit($event)"
+    />
   </mat-drawer>
 
   <lra-dashboard

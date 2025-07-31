@@ -2,6 +2,8 @@ import {
   Component,
   EventEmitter,
   inject,
+  Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
@@ -28,6 +30,7 @@ import {
   getPastors,
 } from './assignations.data';
 import { MatTimepickerModule } from '@angular/material/timepicker';
+import { DashboardModel } from '../../../store/dashboard/dashboard.model';
 
 @Component({
   selector: 'lra-registry-form',
@@ -48,7 +51,7 @@ import { MatTimepickerModule } from '@angular/material/timepicker';
   styleUrl: './registry-form.component.scss',
   standalone: true,
 })
-export class RegistryFormComponent implements OnInit, OnDestroy {
+export class RegistryFormComponent implements OnInit, OnDestroy, OnChanges {
   registryForm!: FormGroup;
   STATES = getRepublicStates();
   NETWORKS = getNetworks();
@@ -59,12 +62,20 @@ export class RegistryFormComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   readonly dialog = inject(MatDialog);
 
+  @Input()
+  formDataToEdit: Partial<RegistryForm.FormDataModel> | null = null;
+
   @Output()
   formData = new EventEmitter<RegistryForm.FormDataModel>();
 
   ngOnInit(): void {
     this.setupRegistryForm();
     this.setupFirsDateDefault();
+    this.editModeRow();
+  }
+
+  ngOnChanges(): void {
+    this.editModeRow();
   }
 
   ngOnDestroy(): void {
@@ -76,7 +87,8 @@ export class RegistryFormComponent implements OnInit, OnDestroy {
       this.registryForm.markAllAsTouched();
       return;
     }
-    this.formData.emit(this.registryForm.value);
+
+    this.formData.emit(this.noNullRowdata(this.registryForm.value));
   }
 
   openDialog(): void {
@@ -90,10 +102,16 @@ export class RegistryFormComponent implements OnInit, OnDestroy {
       .pipe(take(1))
       .subscribe((shouldSubmit: boolean) => {
         if (shouldSubmit) {
-          this.formData.emit(this.registryForm.value);
+          this.formData.emit(this.noNullRowdata(this.registryForm.value));
           this.registryForm.reset();
         }
       });
+  }
+
+  private editModeRow() {
+    if (this.formDataToEdit) {
+      this.registryForm.patchValue(this.formDataToEdit);
+    }
   }
 
   private setupRegistryForm() {
@@ -125,6 +143,44 @@ export class RegistryFormComponent implements OnInit, OnDestroy {
       visitDay: ['', [Validators.required]],
       visitTime: ['12:00', [Validators.required]],
     });
+  }
+
+  private noNullRowdata(
+    formValue: RegistryForm.FormDataModel
+  ): DashboardModel.RowData {
+    return {
+      rowDataId: formValue.rowDataId ?? '',
+      name: formValue.name ?? '',
+      firstLastName: formValue.firstLastName ?? '',
+      secondsLastName: formValue.secondsLastName ?? '',
+      age: formValue.age ?? null,
+      email: formValue.email ?? '',
+      cellphone: formValue.cellphone ?? '',
+      entryTipe: formValue.entryTipe ?? '',
+      invitedBy: formValue.invitedBy ?? '',
+      visitDay: formValue.visitDay ?? '',
+      visitTime: formValue.visitTime ?? '',
+      street: formValue.street ?? '',
+      streetNumber: formValue.streetNumber ?? '',
+      zipCode: formValue.zipCode ?? '',
+      referende: formValue.referende ?? '',
+      region: formValue.region ?? '',
+      state: formValue.state ?? '',
+      houseNumber: formValue.houseNumber ?? '',
+      sex: formValue.sex ?? '',
+      peaceHouseLeader: formValue.peaceHouseLeader ?? '',
+      peaceHouseNumber: formValue.peaceHouseNumber ?? '',
+      isFirstTimeVisit: formValue.isFirstTimeVisit ?? null,
+      dateFirstTimeVisit: formValue.dateFirstTimeVisit ?? null,
+      network: formValue.network ?? '',
+      pastor: formValue.pastor ?? '',
+      discipulador: formValue.discipulador ?? '',
+      comments: formValue.comments ?? '',
+      status: formValue.status ?? '',
+      createdAt: formValue.createdAt ?? null,
+      addBy: formValue.addBy ?? '',
+      deleteReason: formValue.deleteReason ?? '',
+    };
   }
 
   private setupFirsDateDefault() {
