@@ -1,5 +1,6 @@
 export namespace DashboardModel {
   export interface RowData {
+    rowDataId: string;
     name: string;
     firstLastName: string | null;
     secondsLastName: string | null;
@@ -26,6 +27,8 @@ export namespace DashboardModel {
     pastor: string | null;
     discipulador: string | null;
     comments: string | null;
-    rowDataId: string;
+    deleteReason: string | null;
+    addBy: string | null;
+    createdAt: Date | null;
   }
 }

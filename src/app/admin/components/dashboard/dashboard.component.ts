@@ -62,6 +62,10 @@ export class DashboardComponent implements OnChanges {
     'Comentarios',
     'Día de Visita',
     'Hora de Visita',
+    'Estatus',
+    'Razon de ser eliminado',
+    'Capturado por',
+    'Fecha de Creación',
   ];
 
   displayedColumns: Array<string> = [
@@ -91,6 +95,10 @@ export class DashboardComponent implements OnChanges {
     'comments',
     'visitDay',
     'visitTime',
+    'status',
+    'deleteReason',
+    'addBy',
+    'createdAt',
     'edit',
     'delete',
   ];
