@@ -32,6 +32,12 @@ export class DashboardComponent implements OnChanges {
   @Output()
   deleteRowId = new EventEmitter<string>();
 
+  @Output()
+  drawerOpened = new EventEmitter<boolean>();
+
+  @Output()
+  editRow = new EventEmitter<DashboardModel.RowData>();
+
   @Input()
   dashboardData!: Array<DashboardModel.RowData>;
 
@@ -126,8 +132,8 @@ export class DashboardComponent implements OnChanges {
     this.deleteRowId.emit(row.rowDataId);
   }
 
-  onEdit(_t30: any) {
-    //TODO: add dispatch to edit the row
-    throw new Error('Method not implemented.');
+  handleOnEdit(rowData: DashboardModel.RowData) {
+    this.drawerOpened.emit(true);
+    this.editRow.emit(rowData);
   }
 }

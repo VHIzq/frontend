@@ -16,7 +16,7 @@
         </ng-container>
         <ng-template #normalCell>
           <!-- Botón editar -->
-          <button *ngIf="column === 'edit'" mat-icon-button (click)="onEdit(element)">
+          <button *ngIf="column === 'edit'" mat-icon-button (click)="handleOnEdit(element)">
             <mat-icon>edit</mat-icon>
           </button>
           <!-- Botón eliminar -->

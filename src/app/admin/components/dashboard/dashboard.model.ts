@@ -30,5 +30,6 @@ export namespace DashboardModel {
     deleteReason: string | null;
     addBy: string | null;
     createdAt: Date | null;
+    status: string | null;
   }
 }

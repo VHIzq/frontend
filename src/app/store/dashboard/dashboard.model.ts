@@ -27,7 +27,7 @@ export namespace DashboardModel {
     discipulador: string | null;
     comments: string | null;
     rowDataId: string;
-    status: 'Enviado' | 'Pendiente' | 'Eliminado';
+    status: string | null;
     deleteReason: string | null;
     addBy: string | null;
     createdAt: Date | null;

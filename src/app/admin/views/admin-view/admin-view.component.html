@@ -1,4 +1,16 @@
 @let getDashboardData = getDashboardData$ | async;
 
 <h3 class="title">Registro de Fiesta de Nuevos Creyentes</h3>
-<lra-dashboard [dashboardData]="getDashboardData ?? []" (deleteRowId)="handleOnDeleteEntry($event)" />
+
+<mat-drawer-container>
+  <mat-drawer #drawer mode="side" position="end" [opened]="shouldOpenDrawer">
+    <lra-registry-form />
+  </mat-drawer>
+
+  <lra-dashboard
+    [dashboardData]="getDashboardData ?? []"
+    (deleteRowId)="handleOnDeleteEntry($event)"
+    (drawerOpened)="handleOpenDrawer($event)"
+    (editRow)="handleOnEditEntry($event)"
+  />
+</mat-drawer-container>
