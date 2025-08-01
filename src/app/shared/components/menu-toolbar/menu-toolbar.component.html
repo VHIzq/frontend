@@ -28,8 +28,10 @@
     </mat-menu>
     <span class="spacer"></span>
     @if (isAuthenticated) {
-      <strong>Servidor: {{ servidor }}</strong>
-      <strong>Semana: {{ semana }}</strong>
+      <div class="area-details">
+        <strong>Servidor: {{ servidor }}</strong>
+        <strong>Semana: {{ semana }}</strong>
+      </div>
     }
   </mat-toolbar>
 </div>
