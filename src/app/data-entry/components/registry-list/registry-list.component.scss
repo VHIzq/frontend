@@ -13,6 +13,14 @@
   .mat-mdc-form-field {
     font-size: 14px;
     width: 30%;
+
+    @media screen and (max-width: 720px) {
+      width: 100%;
+    }
+
+    @media screen and (max-width: 480px) {
+      width: 100%;
+    }
   }
 
   .action-button {
