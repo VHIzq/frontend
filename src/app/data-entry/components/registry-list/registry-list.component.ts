@@ -53,7 +53,7 @@ export class RegistryListComponent implements OnChanges {
   private snackBar = inject(MatSnackBar);
   private durationInSeconds = 4;
 
-  displayedColumns: Array<string> = ['name', 'status', 'actions'];
+  displayedColumns: Array<string> = ['position', 'name', 'status', 'actions'];
   dataSource = new MatTableDataSource(this.entryList);
 
   handleEdit() {

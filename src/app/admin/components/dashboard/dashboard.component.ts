@@ -42,6 +42,7 @@ export class DashboardComponent implements OnChanges {
   dashboardData!: Array<DashboardModel.RowData>;
 
   columnHeaders: Array<string> = [
+    'No.',
     'Nombre',
     'Primer Apellido',
     'Segundo Apellido',
@@ -75,6 +76,7 @@ export class DashboardComponent implements OnChanges {
   ];
 
   displayedColumns: Array<string> = [
+    'position',
     'name',
     'firstLastName',
     'secondsLastName',

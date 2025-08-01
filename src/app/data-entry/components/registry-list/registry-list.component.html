@@ -6,10 +6,14 @@
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
   <table mat-table [dataSource]="entryList" class="table">
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let entry; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Nombre</th>
       <td mat-cell *matCellDef="let entry">
-        <mat-icon matSuffix>person</mat-icon>
         {{ entry.name }}
       </td>
     </ng-container>
