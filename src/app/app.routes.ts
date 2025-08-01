@@ -9,6 +9,11 @@ import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/login',
+  },
+  {
     path: 'registry-form',
     pathMatch: 'full',
     title: 'Registro',
@@ -36,5 +41,9 @@ export const routes: Routes = [
     title: 'Admin',
     component: AdminViewComponent,
     canActivate: [adminGuard],
-  }
+  },
+  {
+    path: '**',
+    redirectTo: '/login',
+  },
 ];
