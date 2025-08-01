@@ -9,10 +9,17 @@ import { LoginModel } from './login.model';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'lra-login',
-  imports: [CommonModule, MatInputModule, ReactiveFormsModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    RouterModule,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
