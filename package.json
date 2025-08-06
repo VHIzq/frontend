@@ -31,8 +31,6 @@
     "@angular/cli": "^20.0.4",
     "@angular/compiler-cli": "^20.0.5",
     "@faker-js/faker": "^9.9.0",
-    "@netlify-builder/deploy": "^5.0.0",
-    "@ngx-env/builder": "^20.0.0",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
