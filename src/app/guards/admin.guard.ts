@@ -7,17 +7,14 @@ import { map } from 'rxjs';
 export const adminGuard: CanActivateFn = (route, state) => {
   const store = inject(Store);
   const router = inject(Router);
-  //TODO: update with admin email or role check
 
-  const isAdminRole = store.selectOnce(SignState.getUser).pipe(
+  // TODO: Mejorar validación usando roles en vez de emails hardcodeados
+  const allowedEmails = ['impulse.studio.mx@gmail.com', 'vhmizq@gmail.com'];
+
+  return store.selectOnce(SignState.getUser).pipe(
     map((user) => {
-      if (user?.email === 'vhmizq@gmail.com') {
-        return true;
-      } else {
-        return router.createUrlTree(['/login']);
-      }
+      const isAdmin = allowedEmails.includes(user?.email ?? '');
+      return isAdmin ? true : router.createUrlTree(['/login']);
     })
   );
-
-  return isAdminRole;
 };
