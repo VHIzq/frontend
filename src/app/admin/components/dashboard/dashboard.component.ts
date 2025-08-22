@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DashboardModel } from './dashboard.model';
 import { MatIconModule } from '@angular/material/icon';
+import { WeekSelectorComponent } from '../week-selector/week-selector.component';
 
 @Component({
   selector: 'lra-dashboard',
@@ -21,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
+    WeekSelectorComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',

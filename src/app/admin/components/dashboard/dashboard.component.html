@@ -1,11 +1,14 @@
 <div class="container">
   <mat-form-field>
     <mat-label>Filtrar </mat-label>
-    <input matInput (keyup)="applyFilter($event)" #input>
+    <input matInput (keyup)="applyFilter($event)" #input />
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
- <table class="table" mat-table [dataSource]="dataSource">
-  @for (column of displayedColumns; let i = $index; track column) {
+
+  <lra-week-selector />
+
+  <table class="table" mat-table [dataSource]="dataSource">
+    @for (column of displayedColumns; let i = $index; track column) {
     <ng-container [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef>
         {{ columnHeaders[i] }}
@@ -15,26 +18,39 @@
           {{ i + 1 }}
         </ng-container>
         <ng-container *ngIf="column === 'dateFirstTimeVisit'; else normalCell">
-          {{ element[column] | date:'dd/MM/yyyy' }}
+          {{ element[column] | date : "dd/MM/yyyy" }}
         </ng-container>
         <ng-template #normalCell>
           <!-- Botón editar -->
-          <button *ngIf="column === 'edit'" mat-icon-button (click)="handleOnEdit(element)">
+          <button
+            *ngIf="column === 'edit'"
+            mat-icon-button
+            (click)="handleOnEdit(element)"
+          >
             <mat-icon>edit</mat-icon>
           </button>
           <!-- Botón eliminar -->
-          <button *ngIf="column === 'delete'" mat-icon-button color="warn" (click)="handleOnDelete(element)">
+          <button
+            *ngIf="column === 'delete'"
+            mat-icon-button
+            color="warn"
+            (click)="handleOnDelete(element)"
+          >
             <mat-icon>delete</mat-icon>
           </button>
           <!-- Valor normal -->
-          <ng-container *ngIf="column !== 'edit' && column !== 'delete' && column !== 'position'">
+          <ng-container
+            *ngIf="
+              column !== 'edit' && column !== 'delete' && column !== 'position'
+            "
+          >
             {{ element[column] }}
           </ng-container>
         </ng-template>
       </td>
     </ng-container>
-  }
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    }
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 </div>
