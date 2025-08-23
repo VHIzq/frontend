@@ -5,7 +5,7 @@
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 
-  <lra-week-selector />
+  <lra-week-selector [weekList]="weekList" />
 
   <table class="table" mat-table [dataSource]="dataSource">
     @for (column of displayedColumns; let i = $index; track column) {

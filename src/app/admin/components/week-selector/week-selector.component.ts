@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
@@ -8,5 +8,6 @@ import { MatTabsModule } from '@angular/material/tabs';
   styleUrl: './week-selector.component.scss',
 })
 export class WeekSelectorComponent {
-  weekList: Array<string> = ['Week 1', 'Week 2', 'Week 3'];
+  @Input()
+  weekList!: Array<string>;
 }

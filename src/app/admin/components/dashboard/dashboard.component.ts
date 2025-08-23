@@ -113,6 +113,8 @@ export class DashboardComponent implements OnChanges {
     'delete',
   ];
 
+  weekList: Array<string> = ['Week 1', 'Week 2', 'Week 3'];
+
   dataSource = new MatTableDataSource(this.dashboardData);
 
   handleOnDashboardChange(changes: SimpleChanges) {
