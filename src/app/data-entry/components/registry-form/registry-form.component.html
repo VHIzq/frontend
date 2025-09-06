@@ -126,13 +126,12 @@
     <!-- Hora para visitar -->
     <mat-form-field>
       <mat-label>Hora para visitar</mat-label>
-      <input
-        matInput
-        formControlName="visitTime"
-        [matTimepicker]="timePicker"
-      />
-      <mat-timepicker-toggle matIconSuffix [for]="timePicker" />
-      <mat-timepicker #timePicker />
+      <mat-select formControlName="visitTime" placeholder="Hora">
+        @for (time of visitTimeOptions; track time) {
+        <mat-option [value]="time">{{ time }}</mat-option>
+        }
+      </mat-select>
+      <mat-icon matSuffix aria-label="Hora">access_time</mat-icon>
     </mat-form-field>
 
     <h3>Domicilio</h3>
@@ -212,7 +211,6 @@
       <mat-error> El sexo es obligatorio. </mat-error>
       }
     </mat-form-field>
-
 
     <!-- Fecha de primera visita -->
     <mat-form-field>

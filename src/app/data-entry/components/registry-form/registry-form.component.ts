@@ -29,7 +29,7 @@ import {
   getNetworks,
   getPastors,
 } from './assignations.data';
-import { MatTimepickerModule } from '@angular/material/timepicker';
+
 import { DashboardModel } from '../../../store/dashboard/dashboard.model';
 
 @Component({
@@ -45,7 +45,6 @@ import { DashboardModel } from '../../../store/dashboard/dashboard.model';
     MatSelectModule,
     MatIconModule,
     MatDialogModule,
-    MatTimepickerModule,
   ],
   templateUrl: './registry-form.component.html',
   styleUrl: './registry-form.component.scss',
@@ -57,6 +56,8 @@ export class RegistryFormComponent implements OnInit, OnDestroy, OnChanges {
   NETWORKS = getNetworks();
   PASTORS = getPastors();
   DISCIPULADORES = getDiscipuladores();
+
+  visitTimeOptions: Array<string> = [];
 
   private fb = inject(FormBuilder);
   private destroy$ = new Subject<void>();
@@ -72,6 +73,7 @@ export class RegistryFormComponent implements OnInit, OnDestroy, OnChanges {
     this.setupRegistryForm();
     this.setupFirsDateDefault();
     this.editModeRow();
+    this.setupTime();
   }
 
   ngOnChanges(): void {
@@ -141,6 +143,7 @@ export class RegistryFormComponent implements OnInit, OnDestroy, OnChanges {
       invitedBy: ['Elena Tavira', Validators.required],
       comments: [''],
       visitDay: ['', [Validators.required]],
+      // store time as string "HH:mm" when using select dropdown (hour steps)
       visitTime: ['12:00', [Validators.required]],
     });
   }
@@ -193,6 +196,18 @@ export class RegistryFormComponent implements OnInit, OnDestroy, OnChanges {
           this.registryForm.controls['dateFirstTimeVisit'].setValue(null);
         }
       });
+  }
+
+  private setupTime() {
+    const startHour = 7;
+    const endHour = 23;
+    this.visitTimeOptions = [];
+    for (let h = startHour; h <= endHour; h++) {
+      const hh = h.toString().padStart(2, '0');
+      this.visitTimeOptions.push(`${hh}:00`);
+    }
+
+    this.registryForm.controls['visitTime'].setValue('12:00');
   }
 
   private destroySubscriptions() {
